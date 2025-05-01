@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-enabled-node'
+    }
 
     stages {
         stage('Run Test') {

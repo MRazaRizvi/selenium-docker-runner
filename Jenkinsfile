@@ -1,22 +1,15 @@
 pipeline {
-    agent {
-        label 'docker-enabled-node'
+  agent {
+    docker {
+      image 'my-jenkins-with-compose'
+      args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
-
-    stages {
-        stage('Run Test') {
-            steps {
-                sh "docker-compose up"
-               
-            }
-        }
-
-        stage('Bring Grid Down') {
-            steps {
-                sh "docker-compose down"
-            }
-        }
-
+  }
+  stages {
+    stage('Run Test') {
+      steps {
+        sh 'docker-compose up'
+      }
     }
-
+  }
 }
